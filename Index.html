@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+    <title>simple student record app</title>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+:root {
+       --card-bg:white;
+       --form-bg: #f9f9f9;
+      --bg-color: #f4f4f9;
+      --table-header:#343a40;
+      /* Off-white background */
+       --text-color: #1a1a1a;
+        /* Dark gray text */ 
+        --button-bg: #2b2d42; 
+        /* Dark button background */ 
+        --button-text: #ffffff; 
+        /* White button text */ 
+        } 
+        /* 2. Dark Mode Styles Override */ 
+        
+        body.dark-mode { 
+        --card-bg:#1e1e1e;
+        --table-header:#444;
+        --form-bg: #2b2b2b;
+        --input-bg: #333;
+        --bg-color: #121212; 
+        /* Off-black background */ 
+        --text-color: #e0e0e0; 
+        /* Light gray text */ 
+        --button-bg: #ffffff; 
+        /* White button background */ 
+        --button-text: #121212; 
+        /* Dark button text */ 
+        }
+
+body {
+     background-color: var(--bg-color); 
+     color: var(--text-color); 
+     font-family: Arial, sans-serif; margin: 0; 
+     padding: 2rem;
+     padding: 20px; 
+     /* Smooth transition animation when shifting themes */ 
+     transition: background-color 0.3s ease, color 0.3s ;
+    
+}
+.container {
+    max-width: 900px;
+    width:95%;
+    margin: auto;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: background-color .3s ease;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    color: var(--text-color);
+}
+
+form {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    background:var(--form-bg);
+    padding: 15px;
+    border-radius: 6px;
+}
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+input {
+    background:var(--input-bg);
+    color:var(--text-color);
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color .3s ease, color .3s ease;
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: flex-end;
+}
+#submitBtn { 
+   background-color: #28a745;
+    }
+.btn-edit { 
+     background-color: #ffc107; 
+     color: black; 
+     margin-right: 5px; 
+     }
+.btn-delete { 
+     background-color: #dc3545; 
+     }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background: var(--table-header);
+    color: white;
+}
+tr:hover {
+ background-color: #f1f1f1;
+  }
+  #studentList{
+      font-weight :bold;
+  }
+  
+  .toggle-btn { 
+  background-color: var(--button-bg); 
+  color: var(--button-text); 
+  border: none; 
+  padding: 0.5rem 1rem; 
+  cursor: pointer; font-size: 1rem; 
+  border-radius: 5px; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+   }
+   @media (max-width:768px){
+
+    form{
+        flex-direction:column;
+    }
+
+    .form-group{
+        width:100%;
+    }
+
+    button{
+        width:100%;
+    }
+
+}
+
+@media (max-width:768px){
+
+.container{
+    width:95%;
+    padding:15px;
+}
+
+form{
+    flex-direction:column;
+}
+
+.form-group{
+    width:100%;
+}
+
+button{
+    width:100%;
+}
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+.toggle-btn{
+    width:auto;
+}
+
+}
+@media (max-width:480px){
+
+h2{
+    font-size:20px;
+}
+
+input{
+    font-size:14px;
+}
+
+button{
+    font-size:14px;
+    padding:12px;
+}
+
+th,
+td{
+    font-size:13px;
+}
+
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Record Management</h2>
+        <button id="theme-toggle" class="toggle-btn">🌙</button>
+        <form id="studentForm">
+            <input type="hidden" id="studentId">
+            <div class="form-group">
+                <label for="name">Student name</label>
+                <input type="text" id="name" required placeholder="Abbas....">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="abbas@gmail.com">
+            </div>
+            
+           <div class="form-group">
+                <label for="matricNo">Matric Number</label>
+                <input type="text" id="rollNo" required placeholder="CSA1636">
+            </div> 
+            
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" id="department" required placeholder="Computer science & IT">
+            </div> 
+            
+            <div class="form-group">
+                <label for="Faculty">Faculty</label>
+                <input type="text" id="faculty" required placeholder="Computing">
+            </div> 
+            <button type="submit" id="submitBtn">Add Student</button>
+        </form>
+        
+        <!-- records table -->
+        <table id="recordTable">
+            <thead>
+                <tr>
+                    <th>Matric Number</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Faculty</th>
+                </tr>
+            </thead>
+            <tbody id="studentList">
+                <!-- javascript inserts row dynamically here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        // Initialize or fetch student data from localStorage
+        
+       let students = JSON.parse(localStorage.getItem(`students`)) || [];
+       
+       const studentForm = document.getElementById("studentForm");
+       const studentList = document.getElementById("studentList");
+       const submitBtn = document.getElementById("submitBtn");
+       
+       // Select the theme button and body elements
+        const themeToggleBtn = document.getElementById('theme-toggle'); 
+        const bodyElement = document.body;
+        
+        // Check for saved theme preference in localStorage on page load 
+        const currentTheme = localStorage.getItem('theme'); 
+        // If a preference exists, apply it immediately 
+        if (currentTheme === 'dark') { 
+        bodyElement.classList.add('dark-mode'); 
+        }
+         // Add click event listener to the button
+          themeToggleBtn.addEventListener("click", () => {
+
+    bodyElement.classList.toggle("dark-mode");
+
+    if(bodyElement.classList.contains("dark-mode")){
+        themeToggleBtn.textContent="☀️";
+        localStorage.setItem("theme","dark");
+    }
+    else{
+        themeToggleBtn.textContent="🌙";
+        localStorage.setItem("theme","light");
+    }
+
+});
+               
+               
+        
+       // Render lists immediately on page load
+document.addEventListener('DOMContentLoaded', displayStudents);
+
+// Handle Form Submit (Create or Update)
+studentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const id = document.getElementById('studentId').value;
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const rollNo = document.getElementById('rollNo').value.trim();
+    const department = document.getElementById('department').value.trim();
+    const faculty = document.getElementById('faculty').value.trim();
+
+    if (id) {
+        // Update operational branch
+        const index = students.findIndex(s => s.id === id);
+        students[index] = { id, name, email, rollNo, department, faculty };
+        submitBtn.textContent = 'Add Student';
+    } else {
+        // Create operational branch
+        const newStudent = {
+            id: Date.now().toString(), // Quick distinct string identifier
+            name,
+            email,
+            rollNo, 
+            department,
+            faculty
+        };
+        students.push(newStudent);
+    }
+
+    saveAndRefresh();
+    studentForm.reset();
+    document.getElementById('studentId').value = '';
+});
+
+// Render profiles onto the DOM table
+function displayStudents() {
+    studentList.innerHTML = '';
+    students.forEach(student => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${student.rollNo}</td>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.department}</td>
+            <td>${student.faculty}</td>
+            <td>
+                <button class="btn-edit" onclick="editStudent('${student.id}')">Edit</button>
+                <button class="btn-delete" onclick="deleteStudent('${student.id}')">Delete</button>
+            </td>
+        `;
+        studentList.appendChild(row);
+    });
+}
+
+// Populate fields for Editing
+window.editStudent = function(id) {
+    const student = students.find(s => s.id === id);
+    if (student) {
+        document.getElementById('studentId').value = student.id;
+        document.getElementById('name').value = student.name;
+        document.getElementById('email').value = student.email;
+        document.getElementById('rollNo').value = student.rollNo;
+        document.getElementById('department').value = student.department;
+        document.getElementById('faculty').value = student.faculty;
+        submitBtn.textContent = 'Update Student';
+    }
+};
+
+
+
+// Remove Student Profiles
+window.deleteStudent = function(id) {
+    if (confirm('Are you sure you want to delete this record?')) {
+        students = students.filter(s => s.id !== id);
+        saveAndRefresh();
+    }
+};
+
+// Unified storage Syncing execution
+function saveAndRefresh() {
+    localStorage.setItem('students', JSON.stringify(students));
+    displayStudents();
+}
+    </script>
+</body>
+</html>  
