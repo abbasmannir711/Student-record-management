@@ -268,7 +268,7 @@ td{
     <script>
         // Initialize or fetch student data from localStorage
         
-       
+       const API_URL = "https://student-record-dqy2.onrender.com/api/students";
             let students = [];
 
 const studentForm = document.getElementById("studentForm");
@@ -318,7 +318,7 @@ studentForm.addEventListener("submit", async (e) => {
 
     const id = document.getElementById("studentId").value;
 
-    const student = {
+    const studentData = {
         name: document.getElementById("name").value.trim(),
         email: document.getElementById("email").value.trim(),
         rollNo: document.getElementById("rollNo").value.trim(),
@@ -326,78 +326,73 @@ studentForm.addEventListener("submit", async (e) => {
         faculty: document.getElementById("faculty").value.trim()
     };
 
-    if (id === "") {
+    try {
 
-        await fetch("http://localhost:3000/register", {
+        if (id) {
 
-            method: "POST",
+            await fetch(`${API_URL}/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(studentData)
+            });
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+            submitBtn.textContent = "Add Student";
 
-            body: JSON.stringify(student)
+        } else {
 
-        });
+            await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(studentData)
+            });
 
-    } else {
+        }
 
-        await fetch(`http://localhost:3000/students/${id}`, {
+        studentForm.reset();
 
-            method: "PUT",
+        document.getElementById("studentId").value = "";
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+        displayStudents();
 
-            body: JSON.stringify(student)
+    } catch (error) {
 
-        });
+        alert("Unable to save student.");
 
-        submitBtn.textContent = "Add Student";
+        console.error(error);
 
     }
 
-    studentForm.reset();
-
-    document.getElementById("studentId").value = "";
-
-    loadStudents();
-
 });
-
 // Display Students
-function displayStudents() {
+async function displayStudents() {
+
+    const response = await fetch(API_URL);
+
+    students = await response.json();
 
     studentList.innerHTML = "";
 
     students.forEach(student => {
 
-        studentList.innerHTML += `
+        const row = document.createElement("tr");
 
-        <tr>
-
-        <td>${student.rollNo}</td>
-
-        <td>${student.name}</td>
-
-        <td>${student.email}</td>
-
-        <td>${student.department}</td>
-
-        <td>${student.faculty}</td>
-
-        <td>
-
-        <button onclick="editStudent('${student.id}')">Edit</button>
-
-        <button onclick="deleteStudent('${student.id}')">Delete</button>
-
-        </td>
-
-        </tr>
-
+        row.innerHTML = `
+            <td>${student.rollNo}</td>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.department}</td>
+            <td>${student.faculty}</td>
+            <td>
+                <button class="btn-edit" onclick="editStudent('${student.id}')">Edit</button>
+                <button class="btn-delete" onclick="deleteStudent('${student.id}')">Delete</button>
+            </td>
         `;
+
+        studentList.appendChild(row);
 
     });
 
