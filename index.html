@@ -268,7 +268,7 @@ td{
     <script>
         // Initialize or fetch student data from localStorage
         
-       const API_URL = "https://student-record-dqy2.onrender.com/api/students";
+       const API_URL = "https://student-record-4qy2.onrender.com/api/students";
             let students = [];
 
 const studentForm = document.getElementById("studentForm");
@@ -301,7 +301,7 @@ themeToggleBtn.addEventListener("click", () => {
 // Load students
 async function loadStudents() {
 
-    const response = await fetch("http://localhost:3000/students");
+    const response = await fetch(API_URL);
 
     students = await response.json();
 
@@ -428,7 +428,7 @@ window.deleteStudent = async function(id){
 
     if(!confirmDelete) return;
 
-    await fetch(`http://localhost:3000/students/${id}`,{
+    await fetch(`${API_URL}/${id}`,{
 
         method:"DELETE"
 
