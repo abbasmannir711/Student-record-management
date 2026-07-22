@@ -219,6 +219,14 @@ td{
 <body>
     <div class="container">
         <h2>Student Record Management</h2>
+        <div style="margin:20px 0;">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Search student..."
+        style="width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;"
+    >
+</div>
         <button id="theme-toggle" class="toggle-btn">🌙</button>
         <form id="studentForm">
             <input type="hidden" id="studentId">
@@ -270,7 +278,7 @@ td{
         
        const API_URL = "https://student-record-4qy2.onrender.com/api/students";
             let students = [];
-
+const searchInput = document.getElementById("searchInput");
 const studentForm = document.getElementById("studentForm");
 const studentList = document.getElementById("studentList");
 const submitBtn = document.getElementById("submitBtn");
@@ -437,7 +445,25 @@ window.deleteStudent = async function(id){
     loadStudents();
 
 }
+searchInput.addEventListener("keyup", function () {
 
+    const keyword = this.value.toLowerCase();
+
+    const rows = document.querySelectorAll("#studentList tr");
+
+    rows.forEach(row => {
+
+        const text = row.textContent.toLowerCase();
+
+        if (text.includes(keyword)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+
+    });
+
+});
     </script>
 </body>
 </html>  
