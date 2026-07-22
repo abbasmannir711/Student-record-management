@@ -349,7 +349,8 @@ studentForm.addEventListener("submit", async (e) => {
         email: document.getElementById("email").value.trim(),
         rollNo: document.getElementById("rollNo").value.trim(),
         department: document.getElementById("department").value.trim(),
-        faculty: document.getElementById("faculty").value.trim()
+        faculty: document.getElementById("faculty").value.trim(),
+        password: document.getElementById("password").value
     };
 
     try {
@@ -380,7 +381,7 @@ studentForm.addEventListener("submit", async (e) => {
 
         studentForm.reset();
 
-        document.getElementById("studentId").value = "";
+        document.getElementById("studentId").value = student._id;
 
         displayStudents();
 
@@ -413,8 +414,8 @@ async function displayStudents() {
             <td>${student.department}</td>
             <td>${student.faculty}</td>
             <td>
-                <button class="btn-edit" onclick="editStudent('${student.id}')">Edit</button>
-                <button class="btn-delete" onclick="deleteStudent('${student.id}')">Delete</button>
+                <button class="btn-edit" onclick="editStudent('${student._id}')">Edit</button>
+                <button class="btn-delete" onclick="deleteStudent('${student._id}')">Delete</button>
             </td>
         `;
 
@@ -427,11 +428,11 @@ async function displayStudents() {
 // Edit Student
 window.editStudent = function(id){
 
-    const student = students.find(s => s.id === id);
+    const student = students.find(s => s._id === id);
 
     if(!student) return;
 
-    document.getElementById("studentId").value = student.id;
+    document.getElementById("studentId").value = student._id;
 
     document.getElementById("name").value = student.name;
 
@@ -442,8 +443,7 @@ window.editStudent = function(id){
     document.getElementById("department").value = student.department;
 
     document.getElementById("faculty").value = student.faculty;
-
-    submitBtn.textContent = "Update Student";
+        submitBtn.textContent = "Update Student";
 
 }
 
