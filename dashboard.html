@@ -3,28 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
+<title>Student Dashboard</title>
 
-<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
-<div class="container">
+<header class="header">
 
-<div class="card">
+<h2>🎓 Student Record Management</h2>
 
-<h1>Student Dashboard</h1>
+<button id="logoutBtn">Logout</button>
+
+</header>
+
+<main class="container">
 
 <h2 id="welcome"></h2>
 
-<button id="logoutBtn">
-Logout
-</button>
+<div class="cards">
 
+<div class="card">
+<h3>Total Students</h3>
+<h1 id="totalStudents">0</h1>
 </div>
 
 </div>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search Student..."
+>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Matric No</th>
+<th>Name</th>
+<th>Email</th>
+<th>Department</th>
+<th>Faculty</th>
+
+</tr>
+
+</thead>
+
+<tbody id="studentList">
+
+</tbody>
+
+</table>
+
+</main>
 
 <script src="dashboard.js"></script>
 
