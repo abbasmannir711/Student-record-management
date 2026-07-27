@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,34 +23,72 @@
 
         <h1>My Profile</h1>
 
-        <div class="profile-item">
-            <label>Full Name</label>
-            <p id="name"></p>
-        </div>
+        <form id="profileForm">
 
-        <div class="profile-item">
-            <label>Email</label>
-            <p id="email"></p>
-        </div>
+            <div class="profile-item">
+                <label>Full Name</label>
 
-        <div class="profile-item">
-            <label>Matric Number</label>
-            <p id="rollNo"></p>
-        </div>
+                <input
+                    type="text"
+                    id="name"
+                    disabled
+                >
+            </div>
 
-        <div class="profile-item">
-            <label>Department</label>
-            <p id="department"></p>
-        </div>
+            <div class="profile-item">
+                <label>Email</label>
 
-        <div class="profile-item">
-            <label>Faculty</label>
-            <p id="faculty"></p>
-        </div>
+                <input
+                    type="email"
+                    id="email"
+                    disabled
+                >
+            </div>
 
-        <button id="editBtn">
-            Edit Profile
-        </button>
+            <div class="profile-item">
+                <label>Matric Number</label>
+
+                <input
+                    type="text"
+                    id="rollNo"
+                    disabled
+                >
+            </div>
+
+            <div class="profile-item">
+                <label>Department</label>
+
+                <input
+                    type="text"
+                    id="department"
+                    disabled
+                >
+            </div>
+
+            <div class="profile-item">
+                <label>Faculty</label>
+
+                <input
+                    type="text"
+                    id="faculty"
+                    disabled
+                >
+            </div>
+
+            <button
+                type="button"
+                id="editBtn">
+                Edit Profile
+            </button>
+
+            <button
+                type="submit"
+                id="saveBtn"
+                style="display:none;">
+                Save Changes
+            </button>
+
+        </form>
 
     </div>
 
