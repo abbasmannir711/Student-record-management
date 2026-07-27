@@ -44,11 +44,58 @@ editBtn.addEventListener("click", () => {
 
 });
 
-// Save button (za mu haɗa da backend a mataki na gaba)
-document.getElementById("profileForm").addEventListener("submit", (e) => {
+// Save button to backend )
+document.getElementById("profileForm").addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    alert("NEW PROFILE.JS IS WORKING..... 🚀");
+    try {
+
+        const response = await fetch(
+            "https://student-record-4qy2.onrender.com/api/auth/profile",
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    department: departmentInput.value.trim(),
+                    faculty: facultyInput.value.trim()
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message);
+            return;
+        }
+
+        localStorage.setItem(
+            "student",
+            JSON.stringify(data.student)
+        );
+
+        alert("✅ Profile Updated Successfully!");
+
+        nameInput.disabled = true;
+        emailInput.disabled = true;
+        departmentInput.disabled = true;
+        facultyInput.disabled = true;
+
+        editBtn.style.display = "block";
+        saveBtn.style.display = "none";
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Unable to update profile.");
+
+    }
 
 });
