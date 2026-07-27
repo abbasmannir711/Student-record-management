@@ -94,7 +94,13 @@ document.getElementById("profileForm").addEventListener("submit", async (e) => {
 
         console.log(error);
 
-        alert("Unable to update profile.");
+        
+
+    alert(
+        "Name: " + error.name +
+        "\nMessage: " + error.message
+    );
+
 
     }
 
