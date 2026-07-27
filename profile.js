@@ -1,5 +1,6 @@
 
 const token = localStorage.getItem("token");
+alert("TOKEN:\n" + token);
 
 if (!token) {
     window.location.href = "login.html";
