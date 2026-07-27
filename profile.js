@@ -49,6 +49,6 @@ document.getElementById("profileForm").addEventListener("submit", (e) => {
 
     e.preventDefault();
 
-    alert("Perfect! Form is ready. Next step: Save to MongoDB 🚀");
+    alert("NEW PROFILE.JS IS WORKING..... 🚀");
 
 });
