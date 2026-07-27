@@ -36,8 +36,8 @@ editBtn.addEventListener("click", () => {
     departmentInput.disabled = false;
     facultyInput.disabled = false;
 
-    // Matric Number ba za a canja ba
-    rollNoInput.disabled = true;
+    // Matric Number  za a canja 
+    rollNoInput.disabled = false;
 
     editBtn.style.display = "none";
     saveBtn.style.display = "block";
