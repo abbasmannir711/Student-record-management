@@ -399,12 +399,16 @@ studentForm.addEventListener("submit", async (e) => {
         displayStudents();
 
     } catch (error) {
+console.error(error);
+      
 
-        alert("Unable to save student.");
+    alert(
+        "Name: " + error.name +
+        "\nMessage: " + error.message
+    );
+}  
 
-        console.error(error);
-
-    }
+    
 
 });
 // Display Students
